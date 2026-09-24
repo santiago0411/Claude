@@ -1,0 +1,68 @@
+{
+  "$comment": "Caps for files that load into agent context every session or get re-read whole. First matching glob wins. A project can add or override rules in .claude/budgets.json (checked first, same shape); set \"off\": true on a rule to disable it there.",
+  "rules": [
+    {
+      "glob": "~/.claude/CLAUDE.md",
+      "maxLines": 60,
+      "maxWords": 600,
+      "why": "It loads into every session of every project on this machine.",
+      "fix": "Keep only rules that apply to all projects. Move project-specific lines to that project's CLAUDE.md and procedures to a skill."
+    },
+    {
+      "glob": "~/.codex/AGENTS.md",
+      "maxLines": 60,
+      "maxWords": 600,
+      "why": "It loads into every Codex session in every repository.",
+      "fix": "Keep only cross-repository rules; move the rest into the repository's own AGENTS.md."
+    },
+    {
+      "glob": "**/HANDOFF.md",
+      "maxLines": 60,
+      "maxWords": 500,
+      "why": "A handoff is a snapshot of now, read at the start of the next session. Handoffs that get appended to every session are how they reach thousands of lines.",
+      "fix": "Overwrite it as a snapshot: goal, state, next steps, gotchas, verify command. Delete finished items (they live in git commits), move durable decisions to docs/decisions/ and every-session rules to CLAUDE.md."
+    },
+    {
+      "glob": "**/.claude/rules/**/*.md",
+      "maxLines": 80,
+      "maxWords": 800,
+      "why": "A rule is injected into context whenever Claude reads a file it matches.",
+      "fix": "One topic per rule file and one line per rule. Move rationale and history to docs/."
+    },
+    {
+      "glob": "**/CLAUDE.md",
+      "maxLines": 200,
+      "maxWords": 2000,
+      "why": "It loads into every session in this project. Anthropic's guidance is under 200 lines, because longer files consume more context and reduce adherence.",
+      "fix": "Run /claude-md-audit. Keep the rules that prevent real mistakes; move procedures to skills, area-specific rules to .claude/rules/ with paths:, rationale and history to docs/."
+    },
+    {
+      "glob": "**/CLAUDE.local.md",
+      "maxLines": 200,
+      "maxWords": 2000,
+      "why": "It loads into every session in this project, alongside CLAUDE.md.",
+      "fix": "Keep personal, machine-specific notes only; anything the team needs belongs in CLAUDE.md."
+    },
+    {
+      "glob": "**/AGENTS.md",
+      "maxLines": 200,
+      "maxWords": 2000,
+      "why": "It loads into every Codex session here, and into Claude sessions that import it. OpenAI's own tips for stretching Codex limits include shrinking AGENTS.md.",
+      "fix": "Run /claude-md-audit on it. Keep build/test commands, non-standard conventions and gotchas; drop overviews the code already shows."
+    },
+    {
+      "glob": "**/SKILL.md",
+      "maxLines": 500,
+      "maxWords": 5000,
+      "why": "Anthropic: keep SKILL.md under 500 lines. After compaction only the first 5,000 tokens of an invoked skill are re-injected.",
+      "fix": "Move reference material into separate files next to SKILL.md and link to them."
+    },
+    {
+      "glob": "**/docs/**/*.md",
+      "maxLines": 400,
+      "maxWords": 4000,
+      "why": "Agents usually read a doc whole, so a 600-line doc costs about 8K tokens every time any part of it is needed.",
+      "fix": "Split it by topic into smaller files with a one-line index entry each. Archive finished plans and audits instead of extending them."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "lean-kit",
+  "version": "0.1.0",
+  "description": "Context-budget guardrails: blocks agent context files (CLAUDE.md, AGENTS.md, HANDOFF.md, rules, docs) from growing past their caps, points new sessions at HANDOFF.md and re-injects it after compaction.",
+  "author": { "name": "santi" }
+}

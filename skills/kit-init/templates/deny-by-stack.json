@@ -1,0 +1,24 @@
+{
+  "$comment": "Read-deny rules for generated folders, merged into permissions.deny in the project's .claude/settings.json. They also cover cat/sed/tee in shell commands. Remove an entry if a project really needs to read that folder.",
+  "unity": [
+    "Read(**/Library/**)",
+    "Read(**/Temp/**)",
+    "Read(**/Logs/**)",
+    "Read(**/obj/**)",
+    "Read(**/Build/**)",
+    "Read(**/Builds/**)",
+    "Read(**/MemoryCaptures/**)"
+  ],
+  "dotnet": [
+    "Read(**/bin/**)",
+    "Read(**/obj/**)"
+  ],
+  "node": [
+    "Read(**/node_modules/**)",
+    "Read(**/.next/**)",
+    "Read(**/dist/**)",
+    "Read(**/coverage/**)",
+    "Read(**/test-results/**)",
+    "Read(**/playwright-report/**)"
+  ]
+}
