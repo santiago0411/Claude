@@ -28,7 +28,7 @@ Anything the installer replaces is backed up to `~/.claude/backups/lean-kit-<tim
 | Piece | Where | How |
 |---|---|---|
 | `lean-kit` plugin: budget hooks, handoff re-injection | `~/.claude/skills/lean-kit` | linked, updates with `git pull` |
-| Skills: `handoff`, `claude-md-audit`, `kit-init` | `~/.claude/skills/` | linked |
+| Skills: `handoff`, `claude-md-audit`, `kit-init`, `new-project` | `~/.claude/skills/` | linked |
 | Global rules (`user/CLAUDE.global.md`) | `~/.claude/CLAUDE.md` | copied |
 | Authoring rule for context files | `~/.claude/rules/` | copied |
 | Subagents: `Explore` (Sonnet, read-only), `verifier` (Haiku) | `~/.claude/agents/` | copied |
@@ -57,7 +57,8 @@ Defaults live in `plugin/budgets.json`. A project can override or switch off a r
 ## Daily use
 
 - One task per session. `/clear` when the task changes; say "handoff" first if it is unfinished.
-- New project: `/kit-init`. Existing CLAUDE.md: `/claude-md-audit`.
+- Brand-new project: `/new-project` (scaffold, lean-kit setup, spec interview, milestone plan).
+  Existing project: `/kit-init`, or `/claude-md-audit` where a CLAUDE.md already exists.
 - Before calling something done: have the `verifier` subagent run the checks.
 - Watch context in the desktop app's usage ring (or the status line with `--statusline`).
 

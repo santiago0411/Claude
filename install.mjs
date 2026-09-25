@@ -78,7 +78,7 @@ function install() {
   console.log(`
 Done${DRY ? ' (dry run: nothing was changed)' : ''}. Next:
   1. Restart Claude Code, or run /reload-plugins, so the lean-kit hooks load.
-  2. In each project, run /kit-init once (or /claude-md-audit where a CLAUDE.md already exists).
+  2. New project: /new-project. Existing project: /kit-init once, or /claude-md-audit where a CLAUDE.md exists.
   3. Edit the files in this repository, not the copies in ~/.claude; then run this installer again.${
   args.has('--codex') ? `
   4. Codex: npm install -g @openai/codex, then codex login. In Claude Code:
