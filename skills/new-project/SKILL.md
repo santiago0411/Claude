@@ -79,5 +79,6 @@ thinnest end-to-end path that builds, runs and has one passing test.
 1. Commit: `Add spec and milestone plan`.
 2. If the project sits under a workspace root with its own CLAUDE.md or AGENTS.md map, add one
    line for it there.
-3. Tell the user the next step: a fresh session (`/clear`), then "implement milestone 1 from
-   docs/plan.md". Suggest pushing to a private GitHub repository so other machines can resume.
+3. Tell the user the next step: a new session opened in the project folder, so its CLAUDE.md and
+   settings load, then "implement milestone 1 from docs/plan.md". Suggest pushing to a private
+   GitHub repository so other machines can resume.
