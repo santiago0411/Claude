@@ -37,13 +37,14 @@ These folders are large, generated, and never the right place to read.
 Make sure `.gitignore` contains `CLAUDE.local.md` and `.claude/settings.local.json`. Do not ignore
 `HANDOFF.md`: it is committed so another machine can resume.
 
-## 5. Suggest, do not install
+## 5. Suggest plugins, do not install
 
-Tell the user which of these fit, and let them install from `/plugin`:
-
-- C#/.NET or Unity: `csharp-lsp` (code intelligence: go-to-definition instead of grep-and-read).
-- TypeScript/JavaScript: `typescript-lsp`.
-- Unity: the official `unity` plugin from Unity Technologies.
+Run `node "${CLAUDE_SKILL_DIR}/scripts/suggest-plugins.mjs" --dir .`, adding `--terms "a,b"` for
+services the project uses that its files don't show. It matches the project's languages,
+dependencies and marker files against the marketplaces registered on this machine and skips
+installed plugins. Present at most five picks, best first, each with its reason and what it adds
+to every session; say when a language server binary is missing and how to install it. The user
+installs from `/plugin`.
 
 ## 6. Report
 

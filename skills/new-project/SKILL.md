@@ -7,8 +7,8 @@ disable-model-invocation: true
 # Start a new project
 
 One session, four outputs: a scaffolded repository, a lean CLAUDE.md, `docs/spec.md` and a
-milestone plan. Write no feature code here; implementation starts in a fresh session with a clean
-context.
+milestone plan, plus plugin recommendations. Write no feature code here; implementation starts in a
+fresh session with a clean context.
 
 ## 0. Ask first
 
@@ -34,10 +34,10 @@ Then `git init` if the generator didn't, and commit: `Scaffold <name> with <gene
 
 ## 2. Set up lean-kit
 
-Read `${CLAUDE_SKILL_DIR}/../kit-init/SKILL.md` and follow its steps in the new folder (in that file,
-`${CLAUDE_SKILL_DIR}` means the kit-init folder). The approval from step 0 covers it: list what you
-write instead of asking again. The build and test commands now exist, so run each one before
-putting it in CLAUDE.md.
+Read `${CLAUDE_SKILL_DIR}/../kit-init/SKILL.md` and follow its steps 1 to 4 in the new folder (in
+that file, `${CLAUDE_SKILL_DIR}` means the kit-init folder). Its plugin step waits until after the
+spec (step 4 below). The approval from step 0 covers it: list what you write instead of asking
+again. The build and test commands now exist, so run each one before putting it in CLAUDE.md.
 
 ## 3. Spec by interview
 
@@ -61,7 +61,17 @@ Then write `docs/spec.md`, aiming for under 150 lines:
 
 Show it to the user and apply their corrections before planning.
 
-## 4. Milestone plan
+## 4. Recommend plugins
+
+Run `node "${CLAUDE_SKILL_DIR}/../kit-init/scripts/suggest-plugins.mjs" --dir <project> --terms "<terms>"`,
+where the terms are the services, frameworks and hosting the spec names (for example
+`stripe,postgres,sentry,vercel`). It checks the marketplaces registered on this machine and skips
+installed plugins. Present at most five picks, best first: the language server for the main
+language, then vendor plugins for services the spec relies on. For each, give the reason, what it
+adds to every session and the `/plugin install` id, and flag a missing language server binary with
+its install command. Install nothing; the user picks.
+
+## 5. Milestone plan
 
 Split the spec into milestones sized for one session each. Every milestone ends with a check
 Claude can run: a test, a build, a script or a screenshot. Milestone 1 is a walking skeleton: the
@@ -74,7 +84,7 @@ thinnest end-to-end path that builds, runs and has one passing test.
   passes, and never delete entries. JSON is less likely than markdown to be rewritten carelessly
   across sessions (Anthropic's long-running agent harness).
 
-## 5. Finish
+## 6. Finish
 
 1. Commit: `Add spec and milestone plan`.
 2. If the project sits under a workspace root with its own CLAUDE.md or AGENTS.md map, add one

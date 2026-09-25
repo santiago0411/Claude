@@ -57,8 +57,11 @@ Defaults live in `plugin/budgets.json`. A project can override or switch off a r
 ## Daily use
 
 - One task per session. `/clear` when the task changes; say "handoff" first if it is unfinished.
-- Brand-new project: `/new-project` (scaffold, lean-kit setup, spec interview, milestone plan).
-  Existing project: `/kit-init`, or `/claude-md-audit` where a CLAUDE.md already exists.
+- Brand-new project: `/new-project` (scaffold, lean-kit setup, spec interview, plugin picks,
+  milestone plan). Existing project: `/kit-init`, or `/claude-md-audit` where a CLAUDE.md exists.
+- Both suggest plugins by matching the project's languages, dependencies and spec against the
+  marketplaces registered on your machine (`skills/kit-init/scripts/suggest-plugins.mjs`). They never
+  install anything.
 - Before calling something done: have the `verifier` subagent run the checks.
 - Watch context in the desktop app's usage ring (or the status line with `--statusline`).
 
